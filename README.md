@@ -1,6 +1,6 @@
 # mineflyaer-digger-bot
 для работы скачайте node.js с официального сайта, после пропишите в консоли следующие команды  
-`npm init  <br>
+`npm init  \n
 npm install mineflayer  
 npm install mineflayer-pathfinder  
 npm install mineflayer-auto-eat  

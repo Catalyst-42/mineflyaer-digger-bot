@@ -1,20 +1,20 @@
-# mineflyaer-digger-bot
-для работы скачайте node.js с официального сайта, после пропишите в консоли следующие команды
-npm init
-npm install mineflayer
-npm install mineflayer-pathfinder
-npm install mineflayer-auto-eat
-npm install mineflayer-tool
-
-Команды:
-
-инвентарь
-list --> вывести в консоль содержимое инвенторя
-
-копание
-cleardigged --> сбрасывает число вырытых линий
-dig --> запуск копания бота
-stop --> вызов паузы для копания
+# mineflyaer-digger-bot\n
+для работы скачайте node.js с официального сайта, после пропишите в консоли следующие команды\n
+npm init\n
+npm install mineflayer\n
+npm install mineflayer-pathfinder\n
+npm install mineflayer-auto-eat\n
+npm install mineflayer-tool\n
+\n
+Команды:\n
+\n
+инвентарь \n
+list --> вывести в консоль содержимое инвенторя \n
+\n
+копание \n
+cleardigged --> сбрасывает число вырытых линий\n
+dig --> запуск копания бота\n
+stop --> вызов паузы для копания\n
 
 позиционирование
 come --> подозвать к себе бота

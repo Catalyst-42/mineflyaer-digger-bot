@@ -58,8 +58,10 @@ bot.once('spawn', () => {
 
 bot.on('health', () => {
   console.log(`food ${bot.food}`)
-  if (bot.food === 20) bot.autoEat.disable()
-  else bot.autoEat.enable()
+  if (bot.food !== 20) {
+    bot.autoEat.disable()
+    bot.autoEat.enable()
+  }
 })
 
 // парсинг чата 
@@ -214,7 +216,7 @@ function isAir() {
       bot.blockAt(bot.entity.position.offset(-3*sway, 0, 0)).name === 'air' &&
       bot.blockAt(bot.entity.position.offset(-1*sway, 1, 0)).name === 'air' &&
       bot.blockAt(bot.entity.position.offset(-2*sway, 1, 0)).name === 'air' &&
-      bot.blockAt(bot.entity.position.offset(-3*sway, 1, 0)).name === 'air')
+      bot.blockAt(bot.entity.position.offset(-3*sway, 1, 0)).name === 'air' )
       { return 1 } else { if (offset === 3) {offset = 0 } }
 }
 
@@ -239,10 +241,18 @@ function digPrepare () {
   if (linesDigged < linesEnd) {
     if (restorePoint === 0) {
       bot.pathfinder.goto(new GoalNear(HomeX, HomeY, HomeZ - (3*linesDigged*shift), 0), dig)
+      if (bot.food !== 20) {
+        bot.autoEat.disable()
+        bot.autoEat.enable()
+      }
       linesDigged += 1
     } else {
       console.log(`restore point founded at ${restore[0]} ${restore[1]} ${restore[2]}`)
       bot.pathfinder.goto(new GoalNear(restore[0], restore[1], restore[2], 0), dig)
+      if (bot.food !== 20) {
+        bot.autoEat.disable()
+        bot.autoEat.enable()
+      }
       restore = []
       restorePoint = 0
     }
@@ -291,15 +301,14 @@ function dig () {
   }
 
   function digDone () {
-    if (digging) {
-      if (offset === 3) { 
-        placeTorch()
-        offset = 0
-        setTimeout(isAir, 500)
-        setTimeout(dig, 1000)
-      } else {
-        dig()
-      }
+    if (!digging) return
+    if (offset === 3) {
+      bot.pathfinder.goto(new GoalNear(bot.entity.position.x-(offset*sway), bot.entity.position.y , bot.entity.position.z, 0), placeTorch)
+      offset = 0
+      isAir()
+      setTimeout(dig, 2000)
+    } else {
+      dig()
     }
   }
 
@@ -314,11 +323,9 @@ function dig () {
                 if (digging) { bot.dig(bot.blockAt(bot.entity.position.offset(-offset*sway, 1, 0)), function () {
                   bot.tool.equipForBlock(bot.blockAt(bot.entity.position.offset(-offset*sway, 0, 0)), {}, () => {
                     if (digging) { bot.dig(bot.blockAt(bot.entity.position.offset(-offset*sway, 0, 0)), function () {
-                      if (offset === 3 && digging && isAir()) {
-                        bot.pathfinder.goto(new GoalNear(bot.entity.position.x-(offset*sway), bot.entity.position.y , bot.entity.position.z, 0), digDone)
-                      } else {
-                        digDone()
-                      }
+                      if (offset === 3 && digging) {
+                        setTimeout(digDone, 1000)
+                      } else { digDone() }
                     }) }
                   })
                 }) }
@@ -488,8 +495,10 @@ async function watchChest (minecart, blocks = [], special = 0, justStore=0) {
 function home () {
   bot.stopDigging()
   digging = 0
-  if (bot.food === 20) bot.autoEat.disable()
-  else bot.autoEat.enable()
+  if (bot.food !== 20) {
+    bot.autoEat.disable()
+    bot.autoEat.enable()
+  }
   bot.pathfinder.goto(new GoalNear(HomeX, HomeY, HomeZ, 0), function () { setTimeout(watchChest, 1000, false, ['chest'], 1) })
 }
 

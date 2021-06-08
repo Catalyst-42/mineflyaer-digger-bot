@@ -1,6 +1,6 @@
 # mineflyaer-digger-bot  
   
-| 🇺🇸 [English](../README.md) | 🇷🇺 [Russian](../lang/README_RU.md)  
+| 🇺🇸 [English](./README.md) | 🇷🇺 [Russian](./README_RU.md)|
 |-------------------------|----------------------------|  
   
 ## Preparing  

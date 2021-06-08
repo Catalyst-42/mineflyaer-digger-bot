@@ -13,7 +13,7 @@ To work, install `node.js` from the official [website](https://nodejs.org/en/), 
 `npm install mineflayer-tool`  
     
 To start the bot  
-node <file name> <host> <port> [bot name] [password]  
+node \<file name> \<host> \<port> \[bot name] \[password]  
 Example: `node index.js localhost 23523 Catalyst`  
   
 If you do everything correctly, the bot will appear on the server  

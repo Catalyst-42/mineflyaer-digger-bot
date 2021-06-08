@@ -1,6 +1,10 @@
-# mineflyaer-digger-bot
-## Подготовка  
-Для работы установите `node.js` с официального [сайта](https://nodejs.org/en/), после, `находясь в папке бота`, пропишите в консоли следующие команды  
+# mineflyaer-digger-bot  
+  
+| 🇺🇸 [English](../README.md) | 🇷🇺 [Russian](../lang/README_RU.md)  
+|-------------------------|----------------------------|  
+  
+## Preparing  
+To work, install `node.js` from the official [website](https://nodejs.org/en/), then, `in the bot folder`, write the following commands in the console  
   
 `npm init`  
 `npm install mineflayer`  
@@ -8,14 +12,14 @@
 `npm install mineflayer-auto-eat`  
 `npm install mineflayer-tool`  
     
-Для запуска бота  
-node <имя файла> <хост> <порт> [имя бота] [пароль]  
-Пример: `node index.js localhost 23523 Catalyst`  
+To start the bot  
+node <file name> <host> <port> [bot name] [password]  
+Example: `node index.js localhost 23523 Catalyst`  
   
-Если вы выполните все верно, бот появиться на сервере  
+If you do everything correctly, the bot will appear on the server  
 
-### Расположение базы 
-Для начала работы необходимо будет создать базу бота, разместив там сундуки по плану  
+### Base Arrangement  
+To get started, you will need to create a bot base, placing there the chests according to the plan  
   
 ```
 . . b . . |   > Z- > | s h i f t  
@@ -23,52 +27,51 @@ node <имя файла> <хост> <порт> [имя бота] [пароль]
 # c . c # | X-       | a  
 # c . c # | ^        | y  
   ^   ^  
-  ^   - обычный сундук  
-  ^ - - сундук-ловушка  
+  ^   - chest  
+  ^ - - trap chest  
 ```  
   
-В сундуке-ловушку положите алмазные кирки, лопаты, факела и стейков, после чего устрановите базу бота прописав `sethome`, точка дома будет установлена
- там, где стоит сам бот. После установите число линий для рытья командой `setlimit <limit>` и для запуска бота дайте команду `dig`  
+In the chest trap put diamond picks, shovels, torches and steaks, then set the base of the bot by `sethome`, the house point will be set where the bot itself stands. After set the number of lines to dig command `setlimit <limit>` and to run the bot give the command `prepare`.  
   
-Гайд по управлению (https://youtu.be/qK-4PuNM7mI)
+Guide (ru) (https://youtu.be/qK-4PuNM7mI)
 
-## Команды для чата:
+## Chat commands:
   
-### Инвентарь  
-list --> вывести в консоль содержимое инвентаря  
+### Inventory  
+list --> display the contents of the inventory in the console    
   
-### Копание  
-cleardigged --> сбрасывает число вырытых линий  
-dig --> запуск копания бота  
-stop --> вызов паузы для копания  
+### Digging  
+cleardigged --> resets the number of lines dug  
+dig --> start bot digging  
+stop --> call pause for digging  
   
-### Позиционирование  
-come --> подозвать к себе бота
-sethome --> устанавливает для бота координаты базы / склада  
-setlimit <limit> --> назначает лимит параллельных туннелей  
+### Positioning  
+come --> call the bot to you  
+sethome --> set bot's base / warehouse coordinates  
+setlimit <limit> --> sets parallel tunnel limit  
 
-### Настройки копания  
-sway <-/+> --> X ось, изменение направления капания  
-shift <-/+> --> Z ось, изменение направления сдвига туннелей  
+### Dig settings  
+sway <-/+> --> X axis, change of digging direction  
+shift <-/+> --> Z axis, change tunnel shift direction  
 
-### Дата  
-state --> показывает состояние бота  
-save --> сохранить параметры работы  
-exit --> выход с сохранением  
+### Date  
+state --> show bot's state  
+save --> save parameters  
+exit --> exit with save   
   
-### Отладка  
-prepare --> подготовка к копанию, бот подойдет на место линии, которую он должен выкопать [отладочное]  
-lava --> принудительная проверка на рядом стоящую лаву / воду / воздух [отладочное]  
-home --> отправлять бота домой [отладочное]  
-chest --> сложить лишние вещи в сундук, взять новые [отладочное]  
+### Debugging  
+prepare --> preparation for digging, the bot will come to the place of the line it should dig [debug]  
+lava --> force check on nearby lava / water / air [debug]  
+home --> send bot home [debug]  
+chest --> put extra stuff in chest, get new stuff [debug]  
   
-вид сохранения bot-data.txt:  
+bot-data.txt save view:  
 ```
-35 // вырыто линий  
-40 // максимальное число линий  
--737.5 // домашний X  
-8 // домашний Y  
--68.5 // домашний Z  
+35 // lines dug  
+40 // maximum number of lines  
+-737.5 // home X  
+8 //home Y  
+-68.5 //home Z  
 1 // sway  
 1 // shift  
 ```

@@ -5,7 +5,11 @@
   
 ## Preparing  
 To work, install `node.js` from the official [website](https://nodejs.org/en/), then, `in the bot folder`, write the following commands in the console  
-  
+
+`npm install`
+
+or
+
 `npm init`  
 `npm install mineflayer`  
 `npm install mineflayer-pathfinder`  

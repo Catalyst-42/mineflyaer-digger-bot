@@ -5,7 +5,11 @@
   
 ## Подготовка  
 Для работы установите `node.js` с официального [сайта](https://nodejs.org/en/), после, `находясь в папке бота`, пропишите в консоли следующие команды  
-  
+
+`npm install`
+
+или  
+
 `npm init`  
 `npm install mineflayer`  
 `npm install mineflayer-pathfinder`  

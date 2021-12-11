@@ -17,9 +17,9 @@ or
 `npm install mineflayer-tool`  
     
 To start the bot  
-node \<file name> \<host> \<port> \[bot name] \[password]  
-Example: `node index.js localhost 23523 Catalyst`  
-  
+node --unhandled-rejections=none \<file name> \<host> \<port> \[bot name] \[password]  
+Example: `node --unhandled-rejections=none index.js localhost 23523 Catalyst`  
+    
 If you do everything correctly, the bot will appear on the server  
 
 ### Base Arrangement  

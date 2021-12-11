@@ -17,8 +17,8 @@
 `npm install mineflayer-tool`  
     
 Для запуска бота  
-node <имя файла> <хост> <порт> [имя бота] [пароль]  
-Пример: `node index.js localhost 23523 Catalyst`  
+node --unhandled-rejections=none <имя файла> <хост> <порт> [имя бота] [пароль]  
+Пример: `node --unhandled-rejections=none index.js localhost 23523 Catalyst`  
   
 Если вы выполните все верно, бот появиться на сервере  
 

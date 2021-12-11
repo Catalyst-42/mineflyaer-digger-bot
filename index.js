@@ -20,6 +20,7 @@ const bot = mineflayer.createBot({
 const { pathfinder, Movements, goals: { GoalNear } } = require('mineflayer-pathfinder')
 const vec3 = require('vec3')
 const RANGE_GOAL = 1 
+const  mcData = require('minecraft-data')('1.17.1')
 
 let fileContent = fs.readFileSync("bot-data.txt", "utf8").split('\n')
 let linesDigged = Number(fileContent[0])
@@ -37,15 +38,11 @@ let restore = []
 var chesting = 0
 var digging = 0
 var offset = 0
-let mcData
 
 bot.loadPlugin(pathfinder)
 bot.loadPlugin(toolPlugin)
 bot.loadPlugin(autoeat)
 
-bot.once('inject_allowed', () => {
-  mcData = require('minecraft-data')(bot.version)
-})
 
 bot.once('spawn', () => {
   bot.mcData = require('minecraft-data')(bot.version)
@@ -118,7 +115,6 @@ bot.on('chat', async (username, message) => {
       bot.stopDigging()
       break
     case 'come':
-      const mcData = require('minecraft-data')(bot.version)
       const defaultMove = new Movements(bot, mcData)
       const target = bot.players[username]?.entity
       defaultMove.scafoldingBlocks = []
@@ -138,7 +134,7 @@ bot.on('chat', async (username, message) => {
       bot.pathfinder.goto(new GoalNear(HomeX, HomeY, HomeZ, 0))
       break
     case 'chest':
-      watchChest(false, ['chest'], 1, 1)
+      watchChest(['chest'], 1, 1)
       break
     case 'sethome':
       HomeX = bot.entity.position.x.toFixed(1)
@@ -339,27 +335,16 @@ function dig () {
 }
 
 // все с сундуками
-async function watchChest (minecart, blocks = [], special = 0, justStore=0) {
+async function watchChest (blocks = [], special = 0, justStore=0) {
   chesting = 1
   let chestToOpen
-  if (minecart) {
-    chestToOpen = Object.keys(bot.entities)
-      .map(id => bot.entities[id]).find(e => e.entityType === mcData.entitiesByName.chest_minecart &&
-      e.objectData.intField === 1 &&
-      bot.entity.position.distanceTo(e.position) < 3)
-    if (!chestToOpen) {
-      bot.chat('no chest minecart found')
-      return
-    }
-  } else {
-    chestToOpen = bot.findBlock({
-      matching: blocks.map(name => mcData.blocksByName[name].id),
-      maxDistance: 8
-    })
-    if (!chestToOpen) {
-      bot.chat('no chest found')
-      return
-    }
+  chestToOpen = bot.findBlock({
+    matching: blocks.map(name => mcData.blocksByName[name].id),
+    maxDistance: 8
+  })
+  if (!chestToOpen) {
+    bot.chat('no chest found')
+    return
   }
   const chest = await bot.openChest(chestToOpen)
 
@@ -418,7 +403,7 @@ async function watchChest (minecart, blocks = [], special = 0, justStore=0) {
       return out
     }
 
-    if (freeItems() === items.length) { closeChest(); watchChest(false, ['trapped_chest'], 2, justStore)
+    if (freeItems() === items.length) { closeChest(); watchChest(['trapped_chest'], 2, justStore)
     } else { chestStore() }
   }
   if (special === 2) {
@@ -443,7 +428,7 @@ async function watchChest (minecart, blocks = [], special = 0, justStore=0) {
       }
     }
 
-    watchChest(false, ['chest'], 1, justStore)
+    watchChest(['chest'], 1, justStore)
   }
 
   // забираем нужные вещи
@@ -499,7 +484,7 @@ function home () {
     bot.autoEat.disable()
     bot.autoEat.enable()
   }
-  bot.pathfinder.goto(new GoalNear(HomeX, HomeY, HomeZ, 0), function () { setTimeout(watchChest, 1000, false, ['chest'], 1) })
+  bot.pathfinder.goto(new GoalNear(HomeX, HomeY, HomeZ, 0), function () { setTimeout(watchChest, 1000, ['chest'], 1) })
 }
 
 // save

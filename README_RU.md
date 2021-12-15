@@ -19,7 +19,8 @@
 Для запуска бота  
 node --unhandled-rejections=none <имя файла> <хост> <порт> [имя бота] [пароль]  
 Пример: `node --unhandled-rejections=none index.js localhost 23523 Catalyst`  
-  
+`--unhandled-rejections=none` используется для предотвращения необработанных исключений для факелов
+   
 Если вы выполните все верно, бот появиться на сервере  
 
 ### Расположение базы 

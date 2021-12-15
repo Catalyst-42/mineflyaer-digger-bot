@@ -19,8 +19,7 @@ const bot = mineflayer.createBot({
 // объявление переменных, загрузка плагинов
 const { pathfinder, Movements, goals: { GoalNear } } = require('mineflayer-pathfinder')
 const vec3 = require('vec3')
-const RANGE_GOAL = 1 
-const  mcData = require('minecraft-data')('1.17.1')
+const RANGE_GOAL = 1
 
 let fileContent = fs.readFileSync("bot-data.txt", "utf8").split('\n')
 let linesDigged = Number(fileContent[0])
@@ -44,13 +43,17 @@ bot.loadPlugin(toolPlugin)
 bot.loadPlugin(autoeat)
 
 
-bot.once('spawn', () => {
-  bot.mcData = require('minecraft-data')(bot.version)
+bot.on('login', () => {
   bot.autoEat.options = {
     priority: 'foodPoints',
     startAt: 14,
     bannedFood: []
   }
+  const mcData = require('minecraft-data')(bot.version)
+  const defaultMove = new Movements(bot, mcData)
+  bot.pathfinder.setMovements(defaultMove)
+  defaultMove.scafoldingBlocks = []
+  defaultMove.allowParkour = false
 })
 
 bot.on('health', () => {
@@ -105,27 +108,22 @@ bot.on('chat', async (username, message) => {
       save()
       break
     case 'dig':
-    digging = 1
-    offset = 0
-    dig()
-    linesDigged += 1
-    break
+      digging = 1
+      offset = 0
+      dig()
+      linesDigged += 1
+      break
     case 'stop':
       digging = 0
       bot.stopDigging()
       break
     case 'come':
-      const defaultMove = new Movements(bot, mcData)
       const target = bot.players[username]?.entity
-      defaultMove.scafoldingBlocks = []
-      defaultMove.allowParkour = false
       if (!target) {
         bot.chat("I don't see you !")
         break
       }
       const { x: playerX, y: playerY, z: playerZ } = target.position
-
-      bot.pathfinder.setMovements(defaultMove)
       bot.pathfinder.setGoal(new GoalNear(playerX, playerY, playerZ, RANGE_GOAL))
       break
     case 'home':
@@ -336,6 +334,7 @@ function dig () {
 
 // все с сундуками
 async function watchChest (blocks = [], special = 0, justStore=0) {
+  const mcData = require('minecraft-data')(bot.version)
   chesting = 1
   let chestToOpen
   chestToOpen = bot.findBlock({

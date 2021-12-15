@@ -26,13 +26,15 @@ If you do everything correctly, the bot will appear on the server
 To get started, you will need to create a bot base, placing there the chests according to the plan  
   
 ```
+top view
+
 . . b . . |   > Z- > | s h i f t  
 # . . . # | ^        | w  
 # c . c # | X-       | a  
 # c . c # | ^        | y  
   ^   ^  
-  ^   - chest  
-  ^ - - trap chest  
+  ^   - chest        . - block
+  ^ - - trap chest   # - wall
 ```  
   
 In the chest trap put diamond picks, shovels, torches and steaks, then set the base of the bot by `sethome`, the house point will be set where the bot itself stands. After set the number of lines to dig command `setlimit <limit>` and to run the bot give the command `prepare`.  

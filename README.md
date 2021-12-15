@@ -32,7 +32,7 @@ top view
 # . . . # | ^        | w  
 # c . c # | X-       | a  
 # c . c # | ^        | y  
-  ^   ^  
+  ^   ^              b - bot's sethome x/z
   ^   - chest        . - block
   ^ - - trap chest   # - wall
 ```  

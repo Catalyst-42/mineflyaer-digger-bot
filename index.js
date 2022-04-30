@@ -42,7 +42,6 @@ bot.loadPlugin(pathfinder)
 bot.loadPlugin(toolPlugin)
 bot.loadPlugin(autoeat)
 
-
 bot.on('login', () => {
   bot.autoEat.options = {
     priority: 'foodPoints',
@@ -193,7 +192,7 @@ function lavaExec () {
           if ((y == -1 && bot.blockAt(bot.entity.position.offset(x*sway, y, z)).name === 'air') ||
           (bot.blockAt(bot.entity.position.offset(x*sway, y, z)).name === ['lava', 'water'][nameing])) {
             // console.log(`founded at XYZ: ${bot.entity.position.offset(x*sway, y, z)} ${z} name: ${['lava', 'water'][nameing]} `)
-            bot.chat(`lava or water founded`) 
+            bot.chat(`found water or lava`) 
             digging = 0
             home()
             return 'done'

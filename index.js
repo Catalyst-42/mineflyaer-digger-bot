@@ -10,9 +10,9 @@ if (process.argv.length < 4 || process.argv.length > 6) {
 
 // #создание бота
 const bot = mineflayer.createBot({
-  host: process.argv[2],
-  port: parseInt(process.argv[3]),
-  username: process.argv[4] ? process.argv[4] : 'C',
+  host: scorpion.de.freemcserver.net[2],
+  port: parseInt(26423[3]),
+  username: process.argv[4] ? process.argv[4] : 'MineFlayerBot',
   password: process.argv[5]
 })
 
